@@ -18,6 +18,10 @@ body {
     padding: 0 0 0 40px;
     color:white;
 } 
-.popularityBox img {
-    padding-left: 500px;
+
+
+.popular-content {
+    display:flex;
+    flex-wrap:wrap;
+    text-align: center;
 }

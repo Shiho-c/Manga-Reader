@@ -2,19 +2,28 @@
 
 function createImage(imageSource) {
     if(imageSource !== undefined) {
+        const popularCoverBox = document.querySelector('.popular-content');
+        const mangaContainer = document.createElement('mangaContainer');
+        //Creating title labels
+        const titleElement = document.createElement('div');
+        titleElement.textContent = "Title goes here";
+        titleElement.style.color = "white"
+        //Creating image elements
         const coverElement = document.createElement('img');
-
         coverElement.addEventListener('click', function handleClick(event) {
         console.log(`You clicked ${src}`, event);
         });
-        
-        // ✅ Add text content to element
         coverElement.src = imageSource;  
         coverElement.width = 150;
         coverElement.height = 150;
-        coverElement.style.margin = "50px 0px 0px 40px";
-        const popularityBox = document.getElementById('popularityBox');
-        popularityBox.appendChild(coverElement);
+        coverElement.style.margin = "0px 0px 0px 40px";
+      //  titleElement.style.position = "absolute";
+      //  coverElement.style.position = "absolute";
+       
+        mangaContainer.appendChild(titleElement);
+        mangaContainer.appendChild(coverElement);
+        popularCoverBox.appendChild(mangaContainer);
+        
     }
 }
 

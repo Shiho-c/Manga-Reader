@@ -6,7 +6,9 @@ function createImage(imageSource) {
       //Creating image elements
       const coverElement = document.createElement('img');
       coverElement.addEventListener('click', function handleClick(event) {
-      console.log(`You clicked ${src}`, event);
+        console.log(`You clicked shit`, event);
+        window.open("MangaPage/index.html",'_self');
+
       });
       coverElement.src = imageSource;  
       coverElement.width = 150;

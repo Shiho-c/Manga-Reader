@@ -1,5 +1,5 @@
 "use strict";
-import MangaManager from "./MangaManager.js";
+import MangaManager from "./MangaClasses/MangaManager.js";
 
 
 MangaManager.getMangas();

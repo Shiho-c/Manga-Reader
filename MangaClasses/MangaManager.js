@@ -1,5 +1,5 @@
 import Manga from './Manga.js';
-import Helper from "./Helper.js";
+import Helper from '../Helper.js';
 
 const MangaClass = new Manga();
 

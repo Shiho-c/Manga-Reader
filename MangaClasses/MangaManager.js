@@ -3,6 +3,8 @@ import Helper from '../Helper.js';
 
 const MangaClass = new Manga();
 
+
+
 async function getCovers(mangas) {
     for(let i = 0; i < mangas.data.length; i ++) {
         try {

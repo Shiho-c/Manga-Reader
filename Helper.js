@@ -1,5 +1,13 @@
 "use strict";
 
+function encodeQuery(data){
+  let query = ""
+  for (let d in data)
+       query += encodeURIComponent(d) + '=' + 
+          encodeURIComponent(data[d]) + '&'
+  return query.slice(0, -1)
+}
+
 function createImage(imageSource) {
   if(imageSource !== undefined) {
       
@@ -7,7 +15,9 @@ function createImage(imageSource) {
       const coverElement = document.createElement('img');
       coverElement.addEventListener('click', function handleClick(event) {
         console.log(`You clicked shit`, event);
-        window.open("MangaPage/index.html",'_self');
+        let query = encodeQuery({'mangaCover': imageSource});
+        console.log(`Current query${query}`);
+        window.open(`./MangaPage/MangaPage.html?${query}`,'_self');
 
       });
       coverElement.src = imageSource;  

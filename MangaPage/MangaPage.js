@@ -1,14 +1,20 @@
 "use strict";
+import Manga from "/MangaClasses/Manga.js";
+import Helper from '../Helper.js';
 
-const params = new Proxy(new URLSearchParams(window.location.search), {
-    get: (searchParams, prop) => searchParams.get(prop),
-  });
-  // Get the value of "some_key" in eg "https://example.com/?some_key=some_value"
-  let value = params.mangaCover;
+const MangaClass = new Manga();
+const params = Helper.getQueryParams();
 
-  const coverElement = document.createElement('img');
-  coverElement.src = value;
-  coverElement.width = 300;
-  coverElement.height = 300;
-  const content = document.querySelector('.content')
-  content.appendChild(coverElement);
+let mangaTitle = params.mangaTitle;
+let mangaID = params.mangaID;
+let mangaCover = params.mangaCover;
+let genreXsynopsis = MangaClass.getGenreSynopsis(mangaID);
+genreXsynopsis.then(function(result){
+  console.log(result[0]);
+  document.querySelector(".manga-genres").textContent = result[0];
+  document.querySelector(".manga-synopsis").textContent = result[1];
+})
+
+document.querySelector(".manga-title").textContent = mangaTitle;
+document.querySelector(".manga-cover").src = mangaCover;
+

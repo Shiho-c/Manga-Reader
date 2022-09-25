@@ -8,14 +8,13 @@ function encodeQuery(data){
   return query.slice(0, -1)
 }
 
-function createImage(imageSource) {
+function createImage(mangaTitle, mangaID, imageSource) {
   if(imageSource !== undefined) {
       
       //Creating image elements
       const coverElement = document.createElement('img');
       coverElement.addEventListener('click', function handleClick(event) {
-        console.log(`You clicked shit`, event);
-        let query = encodeQuery({'mangaCover': imageSource});
+        let query = encodeQuery({'mangaTitle': mangaTitle, 'mangaID': mangaID,'mangaCover': imageSource});
         console.log(`Current query${query}`);
         window.open(`./MangaPage/MangaPage.html?${query}`,'_self');
 
@@ -43,11 +42,11 @@ function createTitle(mangaTitle) {
 
 }
 
-function loadPopular(mangaTitle, imageSource) {
+function loadPopular(mangaTitle, mangaID, imageSource) {
   const popularCoverBox = document.querySelector('.popular-content');
   const mangaContainer = document.createElement('mangaContainer');
   let titleElement = createTitle(mangaTitle);
-  let coverElement = createImage(imageSource);
+  let coverElement = createImage(mangaTitle, mangaID, imageSource);
 
   mangaContainer.appendChild(titleElement);
   mangaContainer.appendChild(coverElement);
@@ -68,4 +67,23 @@ function filterTitle(title) {
   return newTitle;
 }
 
-export default {createImage, createTitle, loadPopular};
+function getQueryParams() {
+  const params = new Proxy(new URLSearchParams(window.location.search), {
+    get: (searchParams, prop) => searchParams.get(prop),
+  });
+
+  return params;
+}
+
+function filterGenres(data) {
+  let tags = data.data.attributes.tags;
+  let genres = "";
+  for(let i = 0; i < tags.length; i ++ ) {
+   if(tags[i].attributes.group === "genre") {
+    genres += tags[i].attributes.name.en + " ";
+   }
+  }
+  return genres;
+}
+
+export default {createImage, createTitle, loadPopular, getQueryParams, filterGenres};

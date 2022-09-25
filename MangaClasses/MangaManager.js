@@ -10,8 +10,9 @@ async function getCovers(mangas) {
         try {
             let coverID = mangas.data[i].relationships[2].id;
             let mangaTitle = mangas.data[i].attributes.title.en;
+            let mangaID = mangas.data[i].id;
             let coverSource = await MangaClass.getCover(coverID);
-            Helper.loadPopular(mangaTitle, coverSource);
+            Helper.loadPopular(mangaTitle, mangaID, coverSource);
         }
         catch(err) {
             console.log(`Error: ${err}`);
@@ -26,7 +27,6 @@ async function getMangas() {
     var url = new URL("https://api.mangadex.org/manga"),
     params = {limit:20};
     Object.keys(params).forEach(key => url.searchParams.append(key, params[key]))
-    console.log(url);
     let response = await fetch(url);
     let result = await response.json();
     getCovers(result);

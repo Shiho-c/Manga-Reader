@@ -22,4 +22,19 @@ export default class Manga {
         let genres = Helper.filterGenres(result);
         return [genres, result.data.attributes.description.en];
     }
+
+    async getChapter(mangaID) {
+        let url = `https://api.mangadex.org/manga/${mangaID}/aggregate`;
+        let response = await fetch(url);
+        let result = await response.json();
+        let chapters = [];
+        
+        for(let x in result.volumes) {
+            let volumes = result.volumes[x];
+            for(let chaps in volumes.chapters) {
+                chapters.push(`Chapter ${chaps}`)
+             }
+        }
+        return chapters;
+    }
 }

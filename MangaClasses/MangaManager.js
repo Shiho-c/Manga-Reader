@@ -25,7 +25,7 @@ async function getCovers(mangas) {
 async function getMangas() {
 
     var url = new URL("https://api.mangadex.org/manga"),
-    params = {limit:20};
+    params = {limit:35, "order[rating]": "desc"};
     Object.keys(params).forEach(key => url.searchParams.append(key, params[key]))
     let response = await fetch(url);
     let result = await response.json();

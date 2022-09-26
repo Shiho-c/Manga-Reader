@@ -15,13 +15,12 @@ function createImage(mangaTitle, mangaID, imageSource) {
       const coverElement = document.createElement('img');
       coverElement.addEventListener('click', function handleClick(event) {
         let query = encodeQuery({'mangaTitle': mangaTitle, 'mangaID': mangaID,'mangaCover': imageSource});
-        console.log(`Current query${query}`);
         window.open(`./MangaPage/MangaPage.html?${query}`,'_self');
 
       });
       coverElement.src = imageSource;  
-      coverElement.width = 150;
-      coverElement.height = 150;
+      coverElement.width = 200;
+      coverElement.height = 250;
       coverElement.style.margin = "0px 0px 0px 40px";
     //  titleElement.style.position = "absolute";
     //  coverElement.style.position = "absolute";

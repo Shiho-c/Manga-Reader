@@ -7,21 +7,34 @@
 body {
     background-color: #0b0a0d;
 }
+
+
 .navigation {
     background-color: #d10000;
-    padding-top:30px;
-    margin-top: 20px;
+    margin-top:30px;
+    padding: 0px 0px 0px 40px;
     display:flex;
     list-style: none;
 }
 .navigation li {
-    padding: 0 0 0 40px;
+   
+    font-weight: bold;
+    padding: 12px 40px 12px 40px;
     color:white;
 } 
 
+.navigation li:hover {
+    background-color: gray;
+} 
+
+.navigation li a {
+    text-decoration: none;
+    color:white;
+}
 
 .popular-content {
     display:flex;
     flex-wrap:wrap;
     text-align: center;
+    padding-top:30px;
 }

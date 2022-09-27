@@ -2,39 +2,48 @@ import Helper from "../Helper.js";
 export default class Manga {
 
     constructor () {
+        this.alreadyGotCover = false;
+        this.alreadyGotChapters = false;
+        this.alreadyGotGenre = false;
+        this.coverSource = "";
+        this.chaptersText = [];
+        this.chaptersID = [];
+        this.genres = "";
     }
 
     async getCover(coverID) {
+        if(this.alreadyGotCover) { return this.coverSource};
         let url = `https://api.mangadex.org/cover/${coverID}`;
         let response = await fetch(url);
         let result = await response.json();
         
         let mangaID = result.data.relationships[0].id;
         let fileName = result.data.attributes.fileName;
-        let coverSource = `https://uploads.mangadex.org/covers/${mangaID}/${fileName}`;
-        return coverSource;
+        this.coverSource = `https://uploads.mangadex.org/covers/${mangaID}/${fileName}`;
+        return this.coverSource;
     }
 
     async getGenreSynopsis(mangaID) {
+        if(this.alreadyGotGenre) { return this.genres};
         let url = `https://api.mangadex.org/manga/${mangaID}`;
         let response = await fetch(url);
         let result = await response.json();
-        let genres = Helper.filterGenres(result);
-        return [genres, result.data.attributes.description.en];
+        this.genres = Helper.filterGenres(result);
+        return [this.genres, result.data.attributes.description.en];
     }
 
     async getChapter(mangaID) {
+        if(this.alreadyGotChapters) { return this.chaptersText};
         let url = `https://api.mangadex.org/manga/${mangaID}/aggregate`;
         let response = await fetch(url);
         let result = await response.json();
-        let chapters = [];
-        
         for(let x in result.volumes) {
-            let volumes = result.volumes[x];
-            for(let chaps in volumes.chapters) {
-                chapters.push(`Chapter ${chaps}`)
-             }
+            for(let y in result.volumes[x].chapters) {
+                this.chaptersText.push(`Chapter ${result.volumes[x].chapters[y].chapter}`);
+                this.chaptersID.push(`Chapter ${result.volumes[x].chapters[y].id}`);
+            }
         }
-        return chapters;
+        return [this.chaptersText, this.chaptersID];
     }
 }
+        

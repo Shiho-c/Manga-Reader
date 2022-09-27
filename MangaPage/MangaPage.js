@@ -9,15 +9,21 @@ let mangaTitle = params.mangaTitle;
 let mangaID = params.mangaID;
 let mangaCover = params.mangaCover;
 let genreXsynopsis = MangaClass.getGenreSynopsis(mangaID);
-let chapters = MangaClass.getChapter(mangaID);
-chapters.then(function(chapters) {
-  for(let i = 0; i < chapters.length; i ++) {
-    let chapText = document.createElement("h3");
-    chapText.textContent = chapters[i];
-    chapText.style.borderBottom = "1px solid white";
-    document.querySelector(".chapters-container").appendChild(chapText);
-   // console.log(chaps);
+let mangaChapters = MangaClass.getChapter(mangaID);
 
+mangaChapters.then(function(mangaChapters) {
+  let chaptersText = mangaChapters[0];
+  let chaptersID = mangaChapters[1];
+  for(let i = 0; i < chaptersText.length; i ++) {
+    let chapText = document.createElement("h3");
+    chapText.textContent = chaptersText[i];
+    chapText.style.borderBottom = "1px solid white";
+    chapText.addEventListener('click', function handleClick(event) {
+      let query = Helper.encodeQuery({'chapterID': chaptersID[i]});
+      window.open(`../MangaChapter/MangaChapter.html?${query}`,'_self');
+
+    });
+    document.querySelector(".chapters-container").appendChild(chapText);
   }
 })
 genreXsynopsis.then(function(result){

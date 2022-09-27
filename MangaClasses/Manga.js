@@ -40,7 +40,7 @@ export default class Manga {
         for(let x in result.volumes) {
             for(let y in result.volumes[x].chapters) {
                 this.chaptersText.push(`Chapter ${result.volumes[x].chapters[y].chapter}`);
-                this.chaptersID.push(`Chapter ${result.volumes[x].chapters[y].id}`);
+                this.chaptersID.push(`${result.volumes[x].chapters[y].id}`);
             }
         }
         return [this.chaptersText, this.chaptersID];

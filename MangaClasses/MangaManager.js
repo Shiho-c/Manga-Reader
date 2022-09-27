@@ -4,7 +4,20 @@ import Helper from '../Helper.js';
 const MangaClass = new Manga();
 
 
-
+async function getPages(chapterID) {
+    var url = new URL(`https://api.mangadex.org/at-home/server/${chapterID}`);
+    let response = await fetch(url);
+    let result = await response.json();
+    let hash = result.chapter.hash;
+    let page_urls = [];
+    console.log(result);
+    for(let x in result.chapter.dataSaver) {
+        let pageUrl = `https://uploads.mangadex.org/data-saver/${hash}/${result.chapter.dataSaver[x]}`;
+        page_urls.push(pageUrl);
+    }
+    return page_urls;
+    
+}
 async function getCovers(mangas) {
     for(let i = 0; i < mangas.data.length; i ++) {
         try {
@@ -32,4 +45,4 @@ async function getMangas() {
     getCovers(result);
 }
 
-export default {getCovers, getMangas};
+export default {getPages, getCovers, getMangas};

@@ -1,0 +1,35 @@
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css");
+.navigation {
+    background-color: #d10000;
+    margin-top:30px;
+    padding: 0px 0px 0px 40px;
+    display:flex;
+    list-style: none;
+}
+.navigation li {
+   
+    font-weight: bold;
+    padding: 12px 40px 12px 40px;
+    color:white;
+} 
+
+.navigation li:hover {
+    background-color: gray;
+} 
+
+.navigation li a {
+    text-decoration: none;
+    color:white;
+}
+
+.search-container {
+    padding-left:650px;
+}
+
+.search-container input[type=text]{
+    padding: 6px;
+    border: none;
+    margin-top: 8px;
+    margin-right: 16px;
+    font-size: 17px;
+}

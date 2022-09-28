@@ -5,8 +5,24 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="MangaSearch.css">
 </head>
 <body>
+    <nav>
+        <<div class="header">
+            <ul class="navigation">
+                <li> <a href="../index.html">Home</a></li>
+                <li> <a href="../latest.html">Latest</a></li>
+                <li> <a href="../about.html">About</a></li>
+                <div class="search-container">
+                    <input id="searchBox" type="text" placeholder="Search.." name="search">
+                    <button id="searchButton" type="submit"><i class="fa fa-search"></i></button>
+                  </div>
+            </ul>
+        </div>
+    </nav>
+    <div id="content" class="searched-content">
+    </div>
     <script type="module" src="MangaSearch.js"></script>
 </body>
 </html>

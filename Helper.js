@@ -85,4 +85,4 @@ function filterGenres(data) {
   return genres;
 }
 
-export default {encodeQuery, createImage, createTitle, loadPopular, getQueryParams, filterGenres};
+export default {encodeQuery, createImage, createTitle, loadPopular, getQueryParams, filterGenres, filterTitle};

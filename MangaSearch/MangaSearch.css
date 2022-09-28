@@ -1,0 +1,19 @@
+@import "../navigation.css";
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #0b0a0d;
+}
+
+.searched-content {
+    background-color: #312D2D;
+    color:white;
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 30px 50px 10px 50px;
+}

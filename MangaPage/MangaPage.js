@@ -1,7 +1,9 @@
 "use strict";
 import Manga from "/MangaClasses/Manga.js";
 import Helper from '../Helper.js';
+import Search from "../DefaultElements/Search.js";
 
+Search.initialize();
 const MangaClass = new Manga();
 const params = Helper.getQueryParams();
 

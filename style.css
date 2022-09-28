@@ -1,3 +1,4 @@
+@import "navigation.css";
 * {
     padding: 0;
     margin: 0;
@@ -7,46 +8,9 @@
 body {
     background-color: #0b0a0d;
 }
-
-
-.navigation {
-    background-color: #d10000;
-    margin-top:30px;
-    padding: 0px 0px 0px 40px;
-    display:flex;
-    list-style: none;
-}
-.navigation li {
-   
-    font-weight: bold;
-    padding: 12px 40px 12px 40px;
-    color:white;
-} 
-
-.navigation li:hover {
-    background-color: gray;
-} 
-
-.navigation li a {
-    text-decoration: none;
-    color:white;
-}
-
 .popular-content {
     display:flex;
     flex-wrap:wrap;
     text-align: center;
     padding-top:30px;
-}
-
-  .search-container {
-    padding-left:650px;
-}
-
-.search-container input[type=text]{
-    padding: 6px;
-    border: none;
-    margin-top: 8px;
-    margin-right: 16px;
-    font-size: 17px;
 }

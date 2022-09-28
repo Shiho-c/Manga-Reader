@@ -15,16 +15,8 @@ export default class Manga {
         if(this.alreadyGotCover) { return this.coverSource};
         let url = `https://api.mangadex.org/cover/${coverID}`;
 
-        const response = await fetch(url, {
-        method: 'GET',
-        headers: {
-            accept: 'application/json',
-        },
-        });
+        const response = await fetch(url);
 
-    if (!response.ok) {
-      throw new Error(`Error! status: ${response.status}`);
-    }
 
         let result = await response.json();
         
@@ -37,16 +29,7 @@ export default class Manga {
     async getGenreSynopsis(mangaID) {
         if(this.alreadyGotGenre) { return this.genres};
         let url = `https://api.mangadex.org/manga/${mangaID}`;
-        const response = await fetch(url, {
-            method: 'GET',
-            headers: {
-                accept: 'application/json',
-            },
-            });
-    
-        if (!response.ok) {
-          throw new Error(`Error! status: ${response.status}`);
-        }      
+        const response = await fetch(url);
         
         let result = await response.json();
         this.genres = Helper.filterGenres(result);
@@ -56,16 +39,7 @@ export default class Manga {
     async getChapter(mangaID) {
         if(this.alreadyGotChapters) { return this.chaptersText};
         let url = `https://api.mangadex.org/manga/${mangaID}/aggregate`;
-        const response = await fetch(url, {
-            method: 'GET',
-            headers: {
-                accept: 'application/json',
-            },
-            });
-    
-        if (!response.ok) {
-          throw new Error(`Error! status: ${response.status}`);
-        }
+        const response = await fetch(url);
         
         let result = await response.json();
         for(let x in result.volumes) {

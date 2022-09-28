@@ -6,16 +6,7 @@ const MangaClass = new Manga();
 
 async function getPages(chapterID) {
     var url = new URL(`https://api.mangadex.org/at-home/server/${chapterID}`);
-    const response = await fetch(url, {
-        method: 'GET',
-        headers: {
-            accept: 'application/json',
-        },
-        });
-
-    if (!response.ok) {
-      throw new Error(`Error! status: ${response.status}`);
-    } 
+    const response = await fetch(url);
     
     let result = await response.json();
     let hash = result.chapter.hash;
@@ -50,19 +41,39 @@ async function getMangas() {
     var url = new URL("https://api.mangadex.org/manga"),
     params = {limit:35, "order[rating]": "desc"};
     Object.keys(params).forEach(key => url.searchParams.append(key, params[key]))
-    const response = await fetch(url, {
-        method: 'GET',
-        headers: {
-            accept: 'application/json',
-        },
-        });
+    const response = await fetch(url);
 
-    if (!response.ok) {
-      throw new Error(`Error! status: ${response.status}`);
-    }  
-    
     let result = await response.json();
     getCovers(result);
 }
 
-export default {getPages, getCovers, getMangas};
+async function searchManga(mangaTitle) {
+    console.log(`Searching for manga: ${mangaTitle}`);
+    var url = new URL("https://api.mangadex.org/manga"),
+    params = {title: mangaTitle};
+    Object.keys(params).forEach(key => url.searchParams.append(key, params[key]))
+    const response = await fetch(url);
+    let result = await response.json();
+    let mangas = []
+    for(let x in result.data) {
+        let mangaID = result.data[x].id;
+        let mangaTitle = result.data[x].attributes.title.en;
+        let mangaCoverID = "";
+        for(let y in result.data[x].relationships) {
+            if(result.data[x].relationships[y].type === "cover_art") {
+                mangaCoverID = result.data[x].relationships[y].id;
+            }
+        }
+        mangas.push({mangaID: mangaID, mangaTitle: mangaTitle, mangaCoverID: mangaCoverID});
+        // mangas[`manga${x}`]['mangaCoverID'] = mangaCoverID;
+        // mangas[`manga${x}`]['mangaTitle'] = mangaTitle;
+       // console.log(`Manga ID: ${mangaID}`);
+       // console.log(`Manga title: ${mangaTitle}`);
+        
+    }
+    return mangas;
+
+}
+
+
+export default {getPages, getCovers, getMangas, searchManga};

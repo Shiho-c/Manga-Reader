@@ -38,3 +38,15 @@ body {
     text-align: center;
     padding-top:30px;
 }
+
+  .search-container {
+    padding-left:650px;
+}
+
+.search-container input[type=text]{
+    padding: 6px;
+    border: none;
+    margin-top: 8px;
+    margin-right: 16px;
+    font-size: 17px;
+}

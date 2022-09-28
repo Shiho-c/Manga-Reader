@@ -1,7 +1,6 @@
 import MangaManager from "../MangaClasses/MangaManager.js";
 import Helper from "../Helper.js";
 import Manga from "../MangaClasses/Manga.js";
-
 function loadSearch(mangaTitle) {
     let searchedResult = MangaManager.searchManga(mangaTitle);
     let searchedContent = document.querySelector(".searched-content");
@@ -23,7 +22,11 @@ function loadSearch(mangaTitle) {
                 coverElement.src = cover;
                 coverElement.width = 200;
                 coverElement.height = 200;
-                
+                coverElement.addEventListener('click', function handleClick(event) {
+                    let query = Helper.encodeQuery({'mangaTitle': result[x].mangaTitle, 'mangaID': result[x].mangaID,'mangaCover': cover});
+                    window.open(`../MangaPage/MangaPage.html?${query}`,'_self');
+            
+                  });
                 searchedContainer.appendChild(searchedTitle);
                 searchedContainer.appendChild(coverElement);
                 

@@ -11,7 +11,6 @@ async function getPages(chapterID) {
     let result = await response.json();
     let hash = result.chapter.hash;
     let page_urls = [];
-    console.log(result);
     for(let x in result.chapter.dataSaver) {
         let pageUrl = `https://uploads.mangadex.org/data-saver/${hash}/${result.chapter.dataSaver[x]}`;
         page_urls.push(pageUrl);
@@ -50,8 +49,10 @@ async function getMangas() {
 async function searchManga(mangaTitle) {
     console.log(`Searching for manga: ${mangaTitle}`);
     var url = new URL("https://api.mangadex.org/manga"),
+
     params = {title: mangaTitle};
     Object.keys(params).forEach(key => url.searchParams.append(key, params[key]))
+
     const response = await fetch(url);
     let result = await response.json();
     let mangas = []

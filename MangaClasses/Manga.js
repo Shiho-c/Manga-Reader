@@ -38,9 +38,12 @@ export default class Manga {
 
     async getChapter(mangaID) {
         if(this.alreadyGotChapters) { return this.chaptersText};
-        let url = `https://api.mangadex.org/manga/${mangaID}/aggregate`;
+        //var url = `https://api.mangadex.org/manga/${mangaID}/aggregate?` + new URLSearchParams({translatedLanguage:['en']}).toString();
+        var url = new URL(`https://api.mangadex.org/manga/${mangaID}/aggregate`),
+
+        params = {"translatedLanguage[]": ['en']};
+        Object.keys(params).forEach(key => url.searchParams.append(key, params[key]))
         const response = await fetch(url);
-        
         let result = await response.json();
         for(let x in result.volumes) {
             for(let y in result.volumes[x].chapters) {
